@@ -6,6 +6,6 @@
     <title>VoetbalToernooi | Home</title>
 </head>
 <body>
-    
+  <p class="bg-400">test</p>
 </body>
 </html>

@@ -8,5 +8,14 @@ const config = {
   printWidth: 500,
   bracketSameLine: true,
   phpVersion: '7.4',
+  overrides: [
+    {
+      files: ['*.php', '*.html'],
+      options: {
+        parser: 'php',
+        embeddedLanguageFormatting: 'auto',
+      },
+    },
+  ],
 };
 module.exports = config;
