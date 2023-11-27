@@ -1,8 +1,13 @@
 {
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "devDependencies": {
+    "@prettier/plugin-php": "^0.21.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-html": "^7.1.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3.3.5"
   }
 }
