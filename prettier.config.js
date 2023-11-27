@@ -8,6 +8,7 @@ const config = {
   printWidth: 500,
   bracketSameLine: true,
   phpVersion: '7.4',
+  singleAttributePerLine: false,
   overrides: [
     {
       files: ['*.php', '*.html'],
