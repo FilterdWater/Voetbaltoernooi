@@ -11,5 +11,6 @@ require_once './php/header.php'; ?>
 <body>
   
 </body>
-<script src="js/functions.js">document.addEventListener('DOMContentLoaded', hamburger());</script>
+<script src="js/functions.js"></script>
+<script>document.addEventListener('DOMContentLoaded', hamburger());</script>
 </html>
