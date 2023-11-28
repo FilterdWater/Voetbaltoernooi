@@ -4,6 +4,7 @@
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.21.0",
+    "@tailwindcss/forms": "^0.5.7",
     "eslint": "^8.54.0",
     "eslint-plugin-html": "^7.1.0",
     "prettier": "^3.1.0",
