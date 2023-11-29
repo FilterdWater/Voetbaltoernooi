@@ -6,10 +6,10 @@
 	</a>
 	<nav class="hidden md:block">
 		<ul class="flex items-center gap-6 text-sm">
-		<li><a href=""></a>home</li>
-		<li><a href=""></a>teams</li>
-		<li><a href=""></a>wedstrijden</li>
-		<li><a href=""></a>uitslagen</li>
+		<li><a href="" class="hover:cursor-pointer"></a>home</li>
+		<li><a href="" class="hover:cursor-pointer"></a>teams</li>
+		<li><a href="" class="hover:cursor-pointer"></a>wedstrijden</li>
+		<li><a href="" class="hover:cursor-pointer"></a>uitslagen</li>
 		</ul>
 	</nav>
 	<div class="flex items-center gap-4 sm:flex">
@@ -38,10 +38,10 @@
 		</div>
 
 		<ul class="mx-auto flex flex-col items-center gap-6 text-sm">
-			<li><a href=""></a>home</li>
-			<li><a href=""></a>teams</li>
-			<li><a href=""></a>wedstrijden</li>
-			<li><a href=""></a>uitslagen</li>
+			<li><a href="" class="hover:cursor-pointer"></a>home</li>
+			<li><a href="" class="hover:cursor-pointer"></a>teams</li>
+			<li><a href="" class="hover:cursor-pointer"></a>wedstrijden</li>
+			<li><a href="" class="hover:cursor-pointer"></a>uitslagen</li>
 		</ul>
 		</nav>
 	</div>
