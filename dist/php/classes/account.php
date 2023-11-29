@@ -15,6 +15,7 @@ class account
   public static $accountBestaatNiet = 'Sorry dit account bestaat niet';
   public static $wachtwoordincorrect = 'Ongeldig wachtwoord';
 
+  //when yu create a new instance of this class please provide an PDO object
   public function __construct($pdo)
   {
     $this->conn = $pdo;

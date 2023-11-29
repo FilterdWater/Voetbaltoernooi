@@ -1,5 +1,7 @@
 <?php
+
 $pageName = 'login';
+require_once 'php/components.php';
 require_once 'php/db.php';
 require_once 'php/classes/account.php';
 
@@ -22,12 +24,7 @@ if (isset($_POST['submitRegister'])) {
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VoetbalToernooi | Home</title>
-    <link rel="stylesheet" href="./output.css" />
-  </head>
+  <?php htmlhead(); ?>
   <body>
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
