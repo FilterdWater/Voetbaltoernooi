@@ -21,10 +21,10 @@ function htmlHeader()
 		</a>
 		<nav class="hidden md:block">
 			<ul class="flex items-center gap-6 text-sm">
-			<li><a href="" class="hover:cursor-pointer"></a>home</li>
-			<li><a href="" class="hover:cursor-pointer"></a>teams</li>
-			<li><a href="" class="hover:cursor-pointer"></a>wedstrijden</li>
-			<li><a href="" class="hover:cursor-pointer"></a>uitslagen</li>
+			<li><a href="index.php" class="hover:cursor-pointer">home</a></li>
+			<li><a href="teams.php" class="hover:cursor-pointer">teams</a></li>
+			<li><a href="" class="hover:cursor-pointer">wedstrijden</a></li>
+			<li><a href="" class="hover:cursor-pointer">uitslagen</a></li>
 			</ul>
 		</nav>
 		<div class="flex items-center gap-4 sm:flex">
