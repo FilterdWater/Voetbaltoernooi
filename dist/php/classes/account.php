@@ -5,16 +5,7 @@ class account
   private $errorArray = ['firstName' => [], 'lastName' => [], 'password' => [], 'password2' => [], 'email' => []];
   private $aangemeld = false;
 
-  public static $voornaamMessage = 'Voornaam moet tussen de 2 en 30 letters zijn';
-  public static $achternaamMessage = 'Achternaam moet tussen de 2 en 30 letters zijn';
-  public static $emailKort = 'email moet minimaal 3 cijfers zijn';
-  public static $emailNietGeldig = 'email adres is niet geldig';
-  public static $emailGebruikt = 'Er bestaat al een account met dit email adres';
-  public static $wachtwoordlengte = 'Achternaam moet tussen de 4 en 50 cijfers zijn';
-  public static $loginMislukt = 'login mislukt probeer het opnieuw';
-  public static $accountBestaatNiet = 'Sorry dit account bestaat niet';
-  public static $wachtwoordincorrect = 'Wrong password';
-  public static $passwordDoesntMatch = 'wachtwoord komt niet overheen';
+  public static $loginMislukt = 'login failed try again';
   public static $fieldEmpty = 'this field must be filled to continue';
 
   //when yu create a new instance of this class please provide an PDO object
@@ -31,8 +22,6 @@ class account
     $this->checkPassword($password);
     $this->compPassword($password, $password2);
 
-    print_r($this->errorArray);
-
     if (empty($this->errorArray['firstName']) && empty($this->errorArray['lastName']) && empty($this->errorArray['password']) && empty($this->errorArray['password2']) && empty($this->errorArray['email'])) {
       $this->errorArray = [];
       $this->aangemeld = true;
@@ -46,12 +35,12 @@ class account
     $user_data = $this->getUser($email);
     if ($user_data) {
       if (password_verify($password, $user_data['password'])) {
-        array_push($this->errorArray['password'], account::$wachtwoordincorrect);
+        array_push($this->errorArray['password'], 'Wrong password');
         return false;
       }
       return true;
     } else {
-      array_push($this->errorArray['password'], account::$accountBestaatNiet);
+      array_push($this->errorArray['password'], 'Sorry an account with this email doesnt exist');
       return false;
     }
   }
@@ -80,53 +69,64 @@ class account
     return $stmt->execute();
   }
 
-  public function CheckVoornaam($vn)
+  private function CheckVoornaam($fn)
   {
-    if (strlen($vn) < 2 || strlen($vn) > 25) {
-      array_push($this->errorArray['firstName'], account::$voornaamMessage);
+    //firstname lenght
+    if (strlen($fn) < 1 || strlen($fn) > 29) {
+      array_push($this->errorArray['firstName'], 'firstname must be between 2 & 30 characters');
     }
   }
 
-  public function CheckAchternaam($an)
+  private function CheckAchternaam($an)
   {
-    if (strlen($an) < 2 || strlen($an) > 30) {
-      array_push($this->errorArray['lastName'], account::$achternaamMessage);
+    //lastname lenght
+    if (strlen($an) < 1 || strlen($an) > 29) {
+      array_push($this->errorArray['lastName'], 'lastname must be between 2 & 30 characters');
     }
   }
 
-  public function CheckEmail($email)
+  private function CheckEmail($email)
   {
-    if (strlen($email) < 3) {
-      array_push($this->errorArray['email'], account::$emailKort);
+    //email length
+    if (strlen($email) < 2) {
+      array_push($this->errorArray['email'], 'email moet minimaal 3 cijfers zijn');
       return;
     }
+    //email Valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      array_push($this->errorArray['email'], account::$emailNietGeldig);
+      array_push($this->errorArray['email'], 'email address is not valid');
+      return;
     }
+    //email exists
     $query = "SELECT email FROM `user` WHERE email LIKE '%$email%'";
     $stmt = $this->conn->query($query);
     if ($stmt->fetch(PDO::FETCH_ASSOC) != 0) {
-      array_push($this->errorArray['email'], account::$emailGebruikt);
+      array_push($this->errorArray['email'], 'there already exists an account with this email address');
     }
   }
 
-  public function checkPassword($password)
+  private function checkPassword($password)
   {
+    //password length
     if (strlen($password) < 5 || strlen($password) > 50) {
-      array_push($this->errorArray['password'], account::$wachtwoordlengte);
+      array_push($this->errorArray['password'], 'password must be between 4 & 50 characters');
     }
+    //password length short
+    //password length long (150 characters)
+    //password special characters
+    //password length
   }
 
-  public function compPassword($password, $password2)
+  private function compPassword($password, $password2)
   {
+    //password Same
     if ($password !== $password2) {
-      array_push($this->errorArray['password2'], account::$passwordDoesntMatch);
+      array_push($this->errorArray['password2'], 'Passwords do not match.');
     }
   }
 
   public function getError($type)
   {
-    //print_r($this->errorArray[$type]);
     if (isset($this->errorArray[$type])) {
       $errors[] = $this->errorArray[$type]; //pakt de errors van het type
       foreach ($errors[0] as $error) {
