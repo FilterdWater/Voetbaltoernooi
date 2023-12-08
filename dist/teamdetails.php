@@ -1,6 +1,8 @@
 <?php
-require_once 'php/components.php';
+$pageName = 'teamDetails';
 require_once 'php/functions.php';
+redirectToLoginIfNotLoggedIn();
+require_once 'php/components.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +12,7 @@ require_once 'php/functions.php';
     <title>VoetbalToernooi | TeamDetails</title>
     <link rel="stylesheet" href="./style/output.css">
 </head>
-<?= htmlHeader() ?>
+<?= htmlHeader($pageName) ?>
 <body>
     <?php
     // Get team id from teams.php through url

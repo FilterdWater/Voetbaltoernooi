@@ -1,10 +1,12 @@
 <?php
-
 $pageName = 'login';
+require_once 'php/functions.php';
+redirectToHomeIfLoggedIn();
 require_once 'php/db.php';
 require_once 'php/classes/account.php';
 require_once 'php/components.php';
-//require_once 'php/components.php';
+
+//als de gebruiker is ingelogd komt er een button in de navbar waarmee je kan uitloggen
 
 $account = new Account($pdo);
 if (isset($_POST['submit'])) {
@@ -12,14 +14,18 @@ if (isset($_POST['submit'])) {
   $pw = $_POST['password'];
   $success = $account->login($email, $pw);
   if ($success) {
-    //$_SESSION['Gebruiker'] = $voornaam + ' ' + $achternaam;
+    $userData = $account->getUser($email);
+    session_start();
+    $_SESSION['logged_in'] = true;
+    $_SESSION['id'] = $userData['id'];
+    $_SESSION['Gebruiker'] = $userData['first_name'] + ' ' + $userData['last_name'];
     header('location: home.php');
   }
 }
 ?>
 <!doctype html>
 <html lang="en">
-  <?php htmlhead(); ?>
+  <?php htmlhead($pageName); ?>
   <body>
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">

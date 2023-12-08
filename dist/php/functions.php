@@ -109,3 +109,38 @@ function getUser($userId)
     $pdo = null;
   }
 }
+
+//user CAN visit page if this function is called
+// Redirects to login page if user is not logged in
+function redirectToLoginIfNotLoggedIn()
+{
+  session_start();
+  if (!isset($_SESSION['logged_in'])) {
+    header('location: login.php');
+    exit();
+  }
+}
+
+// Redirects to home page if user is logged in
+function redirectToHomeIfLoggedIn()
+{
+  session_start();
+  if (isset($_SESSION['logged_in'])) {
+    header('location: teams.php');
+    exit();
+  }
+}
+
+//triggert de logout function zodra op de logout knop word gedrukt
+if (isset($_POST['logout'])) {
+  logout();
+}
+
+function logout()
+{
+  if (isset($_POST['logout'])) {
+    session_start();
+    session_destroy();
+    header('location:index.php');
+  }
+}

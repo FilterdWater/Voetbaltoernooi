@@ -1,9 +1,10 @@
 <?php
-$pageName = 'login';
+$pageName = 'register';
+require_once 'php/functions.php';
+redirectToHomeIfLoggedIn();
 require_once 'php/db.php';
 require_once 'php/classes/account.php';
 require_once 'php/components.php';
-//require_once 'php/components.php';
 
 $account = new Account($pdo);
 
@@ -16,7 +17,6 @@ if (isset($_POST['submitRegister'])) {
   $admin = isset($_POST['admin_select']) ? 1 : 0;
   $success = $account->register($voornaam, $achternaam, $pw, $pw2, $email, $admin);
   if ($success) {
-    //$_SESSION['Gebruiker'] = $voornaam + ' ' + $achternaam;
     header('location: login.php');
   }
 }
@@ -24,7 +24,7 @@ if (isset($_POST['submitRegister'])) {
 
 <!doctype html>
 <html lang="en">
-  <?php htmlhead(); ?>
+  <?php htmlhead($pageName); ?>
   <body>
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">

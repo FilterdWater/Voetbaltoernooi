@@ -1,4 +1,7 @@
 <?php
+$pageName = 'teams';
+require_once 'php/functions.php';
+redirectToLoginIfNotLoggedIn();
 require_once 'php/components.php';
 require_once 'php/functions.php';
 ?>
@@ -10,7 +13,7 @@ require_once 'php/functions.php';
     <title>VoetbalToernooi | Teams</title>
     <link rel="stylesheet" href="./style/output.css" />
   </head>
-  <?= htmlHeader() ?>
+  <?= htmlHeader($pageName) ?>
   <body>
 
     <?php

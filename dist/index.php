@@ -1,12 +1,13 @@
 <?php
-
-$pageName = 'login';
+$pageName = 'home';
+require_once 'php/functions.php';
+redirectToHomeIfLoggedIn();
 require_once 'php/db.php';
 require_once 'php/components.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php htmlhead(); ?>
+    <?php htmlhead($pageName); ?>
 <body>
   <?php htmlheader(); ?>
 </body>
