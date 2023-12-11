@@ -20,7 +20,7 @@ require_once 'php/functions.php';
 <?php
 $pdo = connectToDatabase();
 $QueryGetAllTeams = 'SELECT * FROM team';
-$stmt = $pdo->query($QueryGetAllTeams);
+$stmtTeams = $pdo->query($QueryGetAllTeams);
 ?>
 
 <div class="px-8 py-4 flex justify-center mt-4">
@@ -29,8 +29,8 @@ $stmt = $pdo->query($QueryGetAllTeams);
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8  p-8">
     <?php
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      echo "<div class='bg-white border border-gray-300 p-6 rounded-md'>";
+    while ($row = $stmtTeams->fetch(PDO::FETCH_ASSOC)) {
+      echo "<div class='bg-white border border-gray-300 p-6 rounded-md text-center'>";
       echo "<a class='font-bold text-2xl break-all hover:text-orange-400 transition-colors duration-200' href='teamdetails.php?id=" . $row['id'] . "'>" . $row['name'] . '</a>';
 
       // Retrieve players for the current team
@@ -42,14 +42,14 @@ $stmt = $pdo->query($QueryGetAllTeams);
       $stmtPlayers = $pdo->query($GetTeamPlayers);
 
       echo "
-        <table class='w-full'>
-            <tr class='border-b'>
+        <table class='w-full text-left mt-8'>
+            <tr class='border-b text-center'>
                 <th class='py-2'>First name</th>
                 <th class='py-2'>Last name</th>
             </tr>";
 
       while ($player = $stmtPlayers->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr class='border-b'>
+        echo "<tr class='border-b text-center'>
                     <td class='py-2'>{$player['first_name']}</td>
                     <td class='py-2'>{$player['last_name']}</td>
                   </tr>";

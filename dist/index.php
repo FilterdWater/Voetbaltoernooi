@@ -1,6 +1,7 @@
 <?php
 $pageName = 'home';
 require_once 'php/functions.php';
+redirectToLoginIfNotLoggedIn();
 require_once 'php/db.php';
 require_once 'php/components.php';
 ?>
