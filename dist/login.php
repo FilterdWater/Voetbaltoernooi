@@ -31,7 +31,6 @@ if (isset($_POST['submit'])) {
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section class="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img alt="Night" src=" images/jpeg/pexels-photo-102448.jpeg" class="absolute inset-0 h-full w-full object-cover opacity-80" />
-
           <div class="hidden lg:relative lg:block lg:p-12">
             <a class="block w-fit rounded-lg bg-zinc-700/50 p-2 text-white shadow-lg backdrop-blur-sm" href="index.php">
               <span class="sr-only">Home</span>

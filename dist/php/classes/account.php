@@ -38,6 +38,7 @@ class account
 
   public function login($email, $password)
   {
+    //empty's error array
     $this->errorArray = ['firstName' => [], 'lastName' => [], 'password' => [], 'password2' => [], 'email' => []];
     if ($email == null) {
       array_push($this->errorArray['email'], 'field is empty');
@@ -45,21 +46,21 @@ class account
     if ($password == null) {
       array_push($this->errorArray['password'], 'field is empty');
     }
+
     $this->CheckEmail($email);
-    //email already exists check
-    $query = "SELECT email FROM `user` WHERE email LIKE '%$email%'";
-    $stmt = $this->conn->query($query);
-    if ($stmt->fetch(PDO::FETCH_ASSOC) == 0) {
-      array_push($this->errorArray['email'], 'there doesnt exists an account with this email address');
-    }
     $user_data = $this->getUser($email);
-    if ($user_data) {
-      if (!password_verify($password, $user_data['password'])) {
-        return true;
-      }
-      array_push($this->errorArray['password'], 'password is incorrect');
+
+    if (!$user_data) {
+      array_push($this->errorArray['email'], 'there doesn\'t exist an account with this email address');
+      return false;
     }
-    return false;
+
+    if (password_verify($password, $user_data['password'])) {
+      return true;
+    } else {
+      array_push($this->errorArray['password'], 'password is incorrect');
+      return false;
+    }
   }
 
   public function getUser($email)
