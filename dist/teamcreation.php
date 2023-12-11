@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-    <div class="container mx-auto mt-8 p-8 bg-white rounded-md shadow-md max-w-md">
+    <div class="container mx-auto mt-8 p-8 bg-white rounded-md border border-gray-300 outline-1 max-w-md">
         <h2 class="text-2xl font-bold mb-4">Create Your Team</h2>
 
         <?php if (isset($error)): ?>
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="flex items-center justify-between">
                 <button type="submit" class="px-4 py-2 bg-orange-400 text-white rounded-md hover:bg-orange-500 transition-colors duration-200">Create Team</button>
-                <a href="teams.php" class="text-gray-600 hover:underline">Cancel</a>
+                <a href="teams.php" class="text-gray-600 hover:underline underline-offset-4">Cancel</a>
             </div>
         </form>
     </div>
