@@ -15,10 +15,9 @@ if (isset($_POST['submit'])) {
   $success = $account->login($email, $pw);
   if ($success) {
     $userData = $account->getUser($email);
-    session_start();
     $_SESSION['logged_in'] = true;
     $_SESSION['id'] = $userData['id'];
-    $_SESSION['Gebruiker'] = $userData['first_name'] + ' ' + $userData['last_name'];
+    $_SESSION['Gebruiker'] = $userData['first_name'] . ' ' . $userData['last_name'];
     header('location: teams.php');
   }
 }

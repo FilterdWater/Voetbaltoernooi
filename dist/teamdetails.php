@@ -34,7 +34,7 @@ require_once 'php/components.php';
 
                     <h3 class="mb-2">Players:</h3>                        
                     <!-- Loop through players and display their names -->
-                    <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="grid grid-cols-1 md:grid-cols-3">
 
                     <?php foreach ($players as $player) {
                       echo '<div class="mb-2 mx-2 ">' . $player['first_name'] . ' ' . $player['last_name'] . '</div>';
