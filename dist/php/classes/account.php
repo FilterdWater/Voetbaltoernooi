@@ -16,9 +16,15 @@ class account
 
   public function register($firstName, $lastName, $password, $password2, $email, $admin)
   {
+    $this->errorArray = ['firstName' => [], 'lastName' => [], 'password' => [], 'password2' => [], 'email' => []];
     $this->CheckVoornaam($firstName);
     $this->CheckAchternaam($lastName);
     $this->CheckEmail($email);
+    $query = "SELECT email FROM `user` WHERE email LIKE '%$email%'";
+    $stmt = $this->conn->query($query);
+    if ($stmt->fetch(PDO::FETCH_ASSOC) != 0) {
+      array_push($this->errorArray['email'], 'there already exists an account with this email address');
+    }
     $this->checkPassword($password);
     $this->compPassword($password, $password2);
 
@@ -32,17 +38,28 @@ class account
 
   public function login($email, $password)
   {
+    $this->errorArray = ['firstName' => [], 'lastName' => [], 'password' => [], 'password2' => [], 'email' => []];
+    if ($email == null) {
+      array_push($this->errorArray['email'], 'field is empty');
+    }
+    if ($password == null) {
+      array_push($this->errorArray['password'], 'field is empty');
+    }
+    $this->CheckEmail($email);
+    //email already exists check
+    $query = "SELECT email FROM `user` WHERE email LIKE '%$email%'";
+    $stmt = $this->conn->query($query);
+    if ($stmt->fetch(PDO::FETCH_ASSOC) == 0) {
+      array_push($this->errorArray['email'], 'there doesnt exists an account with this email address');
+    }
     $user_data = $this->getUser($email);
     if ($user_data) {
-      if (password_verify($password, $user_data['password'])) {
-        array_push($this->errorArray['password'], 'Wrong password');
-        return false;
+      if (!password_verify($password, $user_data['password'])) {
+        return true;
       }
-      return true;
-    } else {
-      array_push($this->errorArray['password'], 'Sorry an account with this email doesnt exist');
-      return false;
+      array_push($this->errorArray['password'], 'password is incorrect');
     }
+    return false;
   }
 
   public function getUser($email)
@@ -90,19 +107,14 @@ class account
     //email length
     if (strlen($email) < 2) {
       array_push($this->errorArray['email'], 'email moet minimaal 3 cijfers zijn');
-      return;
     }
     //email Valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       array_push($this->errorArray['email'], 'email address is not valid');
-      return;
     }
     //email exists
-    $query = "SELECT email FROM `user` WHERE email LIKE '%$email%'";
-    $stmt = $this->conn->query($query);
-    if ($stmt->fetch(PDO::FETCH_ASSOC) != 0) {
-      array_push($this->errorArray['email'], 'there already exists an account with this email address');
-    }
+
+    return;
   }
 
   private function checkPassword($password)

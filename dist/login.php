@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['logged_in'] = true;
     $_SESSION['id'] = $userData['id'];
     $_SESSION['Gebruiker'] = $userData['first_name'] + ' ' + $userData['last_name'];
-    header('location: home.php');
+    header('location: teams.php');
   }
 }
 ?>
