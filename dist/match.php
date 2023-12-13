@@ -17,35 +17,36 @@ $stmtmatches = $pdo->query($QueryGetAllmatches);
     </div>
 
     <div class="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
-      <?php
-      while ($row = $stmtmatches->fetch(PDO::FETCH_ASSOC)) {
-        echo "<div class='bg-white border border-gray-300 p-6 rounded-md text-center'>";
-        echo "<a class='font-bold text-2xl break-all hover:text-orange-400 transition-colors duration-200' href='teamdetails.php?id=" . $row['id'] . "'>" . $row['name'] . '</a>'; // Retrieve players for the current team
-        $matchId = $row['id'];
-        $GetTeams = "SELECT user.first_name, user.last_name 
-                          FROM user
-                          JOIN user_has_team ON user.id = user_has_team.user_id
-                          WHERE user_has_team.team_id = $teamId";
-        $stmtPlayers = $pdo->query($GetTeams);
-        echo "
-        <table class='w-full text-left mt-8'>
-            <tr class='border-b text-center'>
-                <th class='py-2'>First name</th>
-                <th class='py-2'>Last name</th>
-            </tr>";
-        while ($player = $stmtPlayers->fetch(PDO::FETCH_ASSOC)) {
-          echo "<tr class='border-b text-center'>
-                    <td class='py-2'>{$player['first_name']}</td>
-                    <td class='py-2'>{$player['last_name']}</td>
-                  </tr>";
-        }
-        echo '</table>';
-        echo '</div>';
-      }
+    <?php while ($wedstrijd = $stmtmatches->fetch(PDO::FETCH_ASSOC)): ?>
+        <?php
+        $teamAId = $wedstrijd['team_a_id'];
+        $teamBId = $wedstrijd['team_b_id'];
 
-      $pdo = null;
-      ?>
-    </div>
+        $queryGetTeamA = 'SELECT * FROM team WHERE id = :teamAId';
+        $queryGetTeamB = 'SELECT * FROM team WHERE id = :teamBId';
+
+        $stmtTeamA = $pdo->prepare($queryGetTeamA);
+        $stmtTeamB = $pdo->prepare($queryGetTeamB);
+
+        $stmtTeamA->bindParam(':teamAId', $teamAId, PDO::PARAM_INT);
+        $stmtTeamB->bindParam(':teamBId', $teamBId, PDO::PARAM_INT);
+
+        $stmtTeamA->execute();
+        $stmtTeamB->execute();
+
+        $teamA = $stmtTeamA->fetch(PDO::FETCH_ASSOC);
+        $teamB = $stmtTeamB->fetch(PDO::FETCH_ASSOC);
+
+        if ($teamA && is_array($teamB)) { ?>
+            <div class="bg-white p-4 shadow-md rounded-md text-center">
+                <p class="text-lg font-semibold mb-2"><?= $teamA['name'] . ' - ' . $teamB['name'] ?></p>
+                <p class="text-lg font-semibold mb-2"><?= $wedstrijd['team_a_id'] . ' - ' . $wedstrijd['team_b_id'] ?></p>
+                <p>Datum: <?= $wedstrijd['datum'] ?></p>
+            </div>
+        <?php } else {// Handle the case where the fetch operation failed (e.g., no results found)
+          echo '<div class="bg-white p-4 shadow-md rounded-md text-center">No data available</div>';}
+        endwhile; ?>
+</div>
   </body>
 
   <script src="js/functions.js"></script>
