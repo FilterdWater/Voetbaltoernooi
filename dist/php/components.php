@@ -29,8 +29,8 @@ function htmlHeader()
 			<ul class="flex items-center gap-6 text-sm">
 			<li><a href="index.php" class="hover:cursor-pointer">home</a></li>
 			<li><a href="teams.php" class="hover:cursor-pointer">teams</a></li>
-			<li><a href="" class="hover:cursor-pointer">wedstrijden</a></li>
-			<li><a href="" class="hover:cursor-pointer">uitslagen</a></li>
+			<li><a href="wedstrijden.php" class="hover:cursor-pointer">wedstrijden</a></li>
+			<li><a href="uitslagen.php" class="hover:cursor-pointer">uitslagen</a></li>
 			</ul>
 		</nav>
 		<div class="flex items-center gap-4 sm:flex">
@@ -60,10 +60,10 @@ function htmlHeader()
 			</div>
 
 			<ul class="mx-auto flex flex-col items-center gap-6 text-sm">
-				<li><a href="" class="hover:cursor-pointer"></a>home</li>
-				<li><a href="" class="hover:cursor-pointer"></a>teams</li>
-				<li><a href="" class="hover:cursor-pointer"></a>wedstrijden</li>
-				<li><a href="" class="hover:cursor-pointer"></a>uitslagen</li>
+				<li><a href="index.php" class="hover:cursor-pointer">home</a></li>
+				<li><a href="teams.php" class="hover:cursor-pointer">teams</a></li>
+				<li><a href="wedstrijden.php" class="hover:cursor-pointer">wedstrijden</a></li>
+				<li><a href="" class="hover:cursor-pointer">uitslagen</a></li>
 				<li><a class="block rounded-md bg-red-500 px-5 py-2 text-sm font-medium text-white transition" href="#"> Logout </a></li>
 			</ul>
 			</nav>
