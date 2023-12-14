@@ -12,9 +12,13 @@ $stmtmatches = $pdo->query($QueryGetAllmatches);
 <html lang="en">
   <body>
     <?php htmlheader(); ?>
-    <div class="mt-4 flex justify-center px-8 py-4">
-      <a href="matchcreation.php" class="rounded-md bg-orange-400 px-4 py-2 text-white transition-colors duration-200 hover:bg-orange-500">Wedstrijd aanmaken</a>
-    </div>
+
+    <?php if (isset($_SESSION['logged_in']) && $_SESSION['admin'] == true) {
+      // if User is an admin, display button
+      echo '<div class="mt-4 flex justify-center px-8 py-4">
+            <a href="matchcreation.php" class="rounded-md bg-orange-400 px-4 py-2 text-white transition-colors duration-200 hover:bg-orange-500">Wedstrijd aanmaken</a>
+          </div>';
+    } ?>
 
     <div class="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
     <?php while ($wedstrijd = $stmtmatches->fetch(PDO::FETCH_ASSOC)): ?>
