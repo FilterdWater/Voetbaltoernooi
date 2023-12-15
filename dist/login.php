@@ -9,15 +9,23 @@ require_once 'php/components.php';
 //als de gebruiker is ingelogd komt er een button in de navbar waarmee je kan uitloggen
 
 $account = new Account($pdo);
+
 if (isset($_POST['submit'])) {
   $email = $_POST['email'];
   $pw = $_POST['password'];
+
   $success = $account->login($email, $pw);
+
   if ($success) {
     $userData = $account->getUser($email);
+
     $_SESSION['logged_in'] = true;
     $_SESSION['id'] = $userData['id'];
     $_SESSION['Gebruiker'] = $userData['first_name'] . ' ' . $userData['last_name'];
+
+    // Check if user is admin if so set admin session variable
+    $_SESSION['admin'] = $userData['admin'] == 1 ? true : false;
+
     header('location: index.php');
   }
 }
