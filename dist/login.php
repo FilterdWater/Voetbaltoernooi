@@ -30,7 +30,6 @@ if (isset($_POST['submit'])) {
   }
 }
 ?>
-?>
 <!doctype html>
 <html lang="en">
   <?php htmlhead($pageName); ?>
