@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 10:21 PM
+-- Generation Time: Dec 15, 2023 at 10:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,16 +33,6 @@ CREATE TABLE `team` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `team`
---
-
-INSERT INTO `team` (`id`, `name`, `user_id`) VALUES
-(1, 'Test', 2),
-(2, 'Test 2', 2),
-(3, 'Lars\'s z\'n team', 2),
-(4, 'Sander\'s z\'n team', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -57,14 +47,6 @@ CREATE TABLE `user` (
   `email` varchar(45) DEFAULT NULL,
   `admin` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `password`, `email`, `admin`) VALUES
-(1, 'Lars', 'van Holland', '$2y$10$MHypkNxBc21bHqW.HOddTOuYwBCpd/./Iu60EN', 'lars@gmail.com', 0),
-(2, 'test', 'test', '$2y$10$qkwRytCx1fpCfSkI5.tzBOtU7YzipDyaZiE4UpbI.5GnOs3mZkYPq', 'test@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -91,16 +73,6 @@ CREATE TABLE `wedstrijd` (
   `team_a_id` int(11) NOT NULL,
   `team_b_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `wedstrijd`
---
-
-INSERT INTO `wedstrijd` (`id`, `datum`, `score_a`, `score_b`, `team_a_id`, `team_b_id`) VALUES
-(1, '2023-12-15', 0, 0, 1, 2),
-(2, '2023-12-15', 0, 0, 2, 1),
-(3, '2023-12-15', 0, 0, 3, 4),
-(4, '2023-12-15', 0, 0, 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -143,19 +115,19 @@ ALTER TABLE `wedstrijd`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wedstrijd`
 --
 ALTER TABLE `wedstrijd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
