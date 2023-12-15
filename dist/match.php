@@ -19,11 +19,17 @@ $stmtmatches = $pdo->query($QueryGetAllmatches);
     <div class="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
     <?php while ($wedstrijd = $stmtmatches->fetch(PDO::FETCH_ASSOC)): ?>
         <?php
-        $stmtTeamA = $pdo->prepare('SELECT * FROM team WHERE id = :teamAId');
-        $stmtTeamB = $pdo->prepare('SELECT * FROM team WHERE id = :teamBId');
+        $teamAId = $wedstrijd['team_a_id'];
+        $teamBId = $wedstrijd['team_b_id'];
 
-        $stmtTeamA->bindParam(':teamAId', $wedstrijd['team_a_id'], PDO::PARAM_INT);
-        $stmtTeamB->bindParam(':teamBId', $wedstrijd['team_b_id'], PDO::PARAM_INT);
+        $queryGetTeamA = 'SELECT * FROM team WHERE id = :teamAId';
+        $queryGetTeamB = 'SELECT * FROM team WHERE id = :teamBId';
+
+        $stmtTeamA = $pdo->prepare($queryGetTeamA);
+        $stmtTeamB = $pdo->prepare($queryGetTeamB);
+
+        $stmtTeamA->bindParam(':teamAId', $teamAId, PDO::PARAM_INT);
+        $stmtTeamB->bindParam(':teamBId', $teamBId, PDO::PARAM_INT);
 
         $stmtTeamA->execute();
         $stmtTeamB->execute();
@@ -32,7 +38,7 @@ $stmtmatches = $pdo->query($QueryGetAllmatches);
         $teamB = $stmtTeamB->fetch(PDO::FETCH_ASSOC);
 
         if ($teamA && is_array($teamB)) { ?>
-            <div class="bg-white p-6 border border-gray-300 rounded-md text-center shadow-sm">
+            <div class="bg-white p-4 shadow-md rounded-md text-center">
                 <p class="text-lg font-semibold mb-2"><?= $teamA['name'] . ' - ' . $teamB['name'] ?></p>
                 <p class="text-lg font-semibold mb-2"><?= $wedstrijd['team_a_id'] . ' - ' . $wedstrijd['team_b_id'] ?></p>
                 <p>Datum: <?= $wedstrijd['datum'] ?></p>
