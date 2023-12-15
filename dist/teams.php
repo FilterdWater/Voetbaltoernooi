@@ -13,7 +13,7 @@ $stmtTeams = $pdo->query($QueryGetAllTeams);
   <body>
     <?php htmlheader(); ?>
     <div class="mt-4 flex justify-center px-8 py-4">
-      <a href="teamcreation.php" class="rounded-md bg-orange-400 px-4 py-2 text-white transition-colors duration-200 hover:bg-orange-500">Create your own team</a>
+      <a href="teamcreation.php" class="rounded-md bg-orange-400 px-4 py-2 text-white transition-colors duration-200 hover:bg-orange-500">Maak je eigen team</a>
     </div>
 
     <div class="grid grid-cols-1 gap-8 p-8 lg:grid-cols-2">
